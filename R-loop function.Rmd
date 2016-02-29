@@ -1,0 +1,72 @@
+---
+title: "Loop Function"
+author: "dongyang Li"
+date: "February 29, 2016"
+output: html_document
+---
+
+###*lapply*
+- Loop over a list and evaluate a function on each element
+
+- Three arguments: a list x, a function and ...
+
+- If x is not a list, it need to be coerced to a list using *as.list*
+
+```{r, cache=TRUE}
+#Calculate the mean of each element in a list
+a <- list(x = 1:5, y = 2:6)
+lapply(a, mean)
+```
+
+###*sapply*
+- same as *lapply* but try to simplify the result
+
+1. If the result is a list where every element is length 1, then a vector is returned.
+
+2. If the result is a list where every element is a vector of the same length(>1), a matrix is returned.
+
+3. If it cannot figure things out, a list is returned.
+
+```{r, cache=TRUE}
+a <- list(x = 1:5, y = 2:6)
+sapply(a, mean)
+```
+
+###*apply*
+- Apply a function over the margins of an array
+
+```{r, cache=TRUE}
+x <- cbind(x1 = 3, x2 = c(4:1, 2:5))
+dimnames(x)[[1]] <- letters[1:8]
+apply(x, 1, mean)
+```
+
+###*tapply*
+- Apply a function over subsets of a vector
+```{r, cache=TRUE}
+x <- c(rnorm(10), runif(10), rnorm(10))
+f <- gl(3, 10) #generate factor levels
+f
+tapply(x, f, mean, simplify = TRUE)
+```
+
+###*mapply*
+- Multivariate version of *lapply*
+
+- Apply a function in parallel over a set of arguments
+
+- Example: the following two kinds of code are the same
+
+1. 
+```{r, cache=TRUE}
+list(rep(1, 4), rep(2, 3), rep(3, 2), rep(4, 1))
+```
+
+2. 
+```{r, cache=TRUE}
+mapply(rep, 1:4, 4:1, SIMPLIFY = TRUE)
+```
+
+###*split*
+- Takes a vector or other objects and splits it into groups determined by a factor or list of factors
+
