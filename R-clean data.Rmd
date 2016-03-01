@@ -1,0 +1,76 @@
+---
+title: "Clean data"
+author: "Dongyang Li"
+date: "March 1, 2016"
+output: html_document
+---
+##Load library
+```{r, cache=TRUE}
+library(plyr)
+library(dplyr)
+```
+
+##Read data
+```{r, cache=TRUE}
+d <- read.csv("D:/RStudio/hungerdata.csv", header = TRUE)
+head(d, 5)
+```
+
+##Change the column names
+```{r, cache=TRUE}
+#Change all the upper case into lower case
+lower <- function (x) {tolower(names(x))}
+names(d) <- lower(d)
+names(d)
+#Change name one by one
+d <- rename(d, gender = sex)
+names(d)
+```
+
+##Sort data
+```{r, cache=TRUE}
+#sorted by year, decreasing
+dsort1 <- arrange(d, desc(year))
+head(dsort1)
+
+#ordered by year firstly, by gender secondly
+dsort2 <- d[order(d$year, d$gender),]
+head(dsort2)
+```
+*arrange* requires the library *plyr*.
+
+##Subset data
+```{r, cache=TRUE}
+#Delete the variable named numeric
+dsubset1 <- select(d, -(numeric))
+head(dsubset1, 3)
+#subset the valued where year is 2012
+dsubset2 <- filter(d, year == 2012)
+head(dsubset2, 3)
+#subset x, year and country where year is 2012.
+dsubset3 <- subset(d, year == 2012, select = c(x, year, country))
+head(dsubset3)
+```
+*select* requires the library *dplyr*.
+
+##Add variables
+```{r, cache=TRUE}
+#calculate the new variable from the data set
+dadd <- mutate(d, newvar = displayvalue * 2)
+head(dadd, 3)
+#give values to the new variable directely
+newvar <- rnorm(nrow(d), mean = 5)
+dadd2 <- cbind(d, newvar)
+head(dadd2, 3)
+#merge two data set
+sub1 <- select(d, x)
+sub1 <- cbind(sub1, newvar)
+dmerge <- merge(d, sub1)
+head(sub1, 2)
+head(dmerge, 2)
+#another way to merge
+dmerge2 <- arrange(join(sub1, d), x)
+head(dmerge2, 2)
+```
+*mutate* requires the library *dplyr*.
+
