@@ -5,81 +5,115 @@ date: "February 29, 2016"
 output: html_document
 ---
 
-###1) Data types
+##Data types
+
+Every object has to intrinsic attributes: mode and length.
+
+Four kinds of basic mode:
 
 - Character
 
-- Numeric
-
-- Integer: Specify the L suffix. For example: 1L
+- Numeric (Integer: Specify the L suffix. For example: 1L)
 
 - Complex
 
 - Logical
 
-###2) Missing values
+Funtion *mode* and *length* can be used to check the attributes of an object respectively.
 
-- NA: missing values
+####Character
 
-- NaN: undefied mathematical operations
+Input with " ".
+
+```{r, cache=TRUE}
+x <- "double \" quotes"
+x
+cat(x)#concatenate and print
+```
+
+##Overview of types of objects
+
+Only data frame and list allow different modes in a same object.
+
+- Vector
+
+- Factor: categorical variable. numeric or character
+
+- Array: table with k dimontions
+
+- Matrix: an array with k=2
+
+- Data frame: table composed of one or several vectors and/or factors all of the same length but possibly of different modes.
+
+- Time series: time series data set containing additional attributes such as frequency and dates.
+
+- List: can contain any type of objects, including lists
+
+##Missing values and infinite
+
+- NA: missing values (not available)
+
+- NaN: undefied mathematical operations (not a number)
 
 - A NaN value is also NA, but the converse is not true.
 
 - Remove missing valuse
+
 ```{r, cache=TRUE}
 x <- c(1, 2, NA, 4)
 missingvalue <- is.na(x)
 x[!missingvalue]
-
 ```
 
-###3) Data frames
+- Positive infinity: *Inf*; negative infinity: *-Inf*
 
-- Used to store tabular values
+##Reading data
+#### read.table; read.csv: reading tabular data
+  
+- header: logical indicating if the file has a header line
+  
+- sep: a string indicating how the columns are separated
+  
+- colClasses: a character vector indicating the class of each column in the dataset
+  
+- comment.char: a character string indicating the comment charachter
+  
+- skip: the number of lines to skip from the beginning
+  
+- stringsAsFactors: should character variables be coded as factor?
 
-- Can store different classes of objects in each column;
-matices must have the every element be the same class
+####readLines: reading lines of a text file
 
-###4) Names
+####source: reading in R code files (inverse of dump)
 
+####dget: reading in R code files (inverse of dput)
+
+####load: reading in saved workspaces
+
+####unserialize: reading single R objects in binary form
+
+##Save data
+
+*write.table*
+
+*write(x, file = "table.txt")*
+
+##Generate data
 ```{r, cache=TRUE}
-x <- 1:3
-names(x) <- c("first", "second", "third")
-x
-names(x)
+1:10 - 1
+1:(10 - 1)
+seq(length = 4, from = 1, to = 5)
+seq(1, 5, 2)#from 1 to 5, increment is 2
+rep(1, 10)#replicate 1 for 10 times
+sequence(4:6)
+sequence(c(3,6))
+#generate levels
+gl(3, 5, labels = c("male", "female", "unknown"))#create 3 levels. the number of each level repeats 5 times
+#create a data frame
+#it will show all the possible combination of the values from each variable
+expand.grid(var1 = c(60, 80), var2 = c(1, 2), gender = c("male", "female"))
+#create random sequences
+rnorm(10, mean = 2, sd = 3)
 ```
 
-###5) Reading data
-- read.table; read.csv: reading tabular data
-  
-  header: logical indicating if the file has a header line
-  
-  sep: a string indicating how the columns are separated
-  
-  colClasses: a character vector indicating the class of each column in the dataset
-  
-  comment.char: a character string indicating the comment charachter
-  
-  skip: the number of lines to skip from the beginning
-  
-  stringsAsFactors: should character variables be coded as factor?
-
-- readLines: reading lines of a text file
-
-- source: reading in R code files (inverse of dump)
-
-- dget: reading in R code files (inverse of dput)
-
-- load: reading in saved workspaces
-
-- unserialize: reading single R objects in binary form
-
-###6) Subsetting lists
-```{r, cache=TRUE}
-x<- list(a = 1:4, b = 0.6)
-x[1]
-x[[1]]
-```
-
-$ can only be used with literal names
 

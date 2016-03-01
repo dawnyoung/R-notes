@@ -68,21 +68,45 @@ img {
 </div>
 
 
-<div id="data-types" class="section level3">
-<h3>1) Data types</h3>
+<div id="data-types" class="section level2">
+<h2>Data types</h2>
+<p>Every object has to intrinsic attributes: mode and length.</p>
+<p>Four kinds of basic mode:</p>
 <ul>
 <li><p>Character</p></li>
-<li><p>Numeric</p></li>
-<li><p>Integer: Specify the L suffix. For example: 1L</p></li>
+<li><p>Numeric (Integer: Specify the L suffix. For example: 1L)</p></li>
 <li><p>Complex</p></li>
 <li><p>Logical</p></li>
 </ul>
+<p>Funtion <em>mode</em> and <em>length</em> can be used to check the attributes of an object respectively.</p>
+<div id="character" class="section level4">
+<h4>Character</h4>
+<p>Input with &quot; “.</p>
+<pre class="r"><code>x &lt;- &quot;double \&quot; quotes&quot;
+x</code></pre>
+<pre><code>## [1] &quot;double \&quot; quotes&quot;</code></pre>
+<pre class="r"><code>cat(x)#concatenate and print</code></pre>
+<pre><code>## double &quot; quotes</code></pre>
 </div>
-<div id="missing-values" class="section level3">
-<h3>2) Missing values</h3>
+</div>
+<div id="overview-of-types-of-objects" class="section level2">
+<h2>Overview of types of objects</h2>
+<p>Only data frame and list allow different modes in a same object.</p>
 <ul>
-<li><p>NA: missing values</p></li>
-<li><p>NaN: undefied mathematical operations</p></li>
+<li><p>Vector</p></li>
+<li><p>Factor: categorical variable. numeric or character</p></li>
+<li><p>Array: table with k dimontions</p></li>
+<li><p>Matrix: an array with k=2</p></li>
+<li><p>Data frame: table composed of one or several vectors and/or factors all of the same length but possibly of different modes.</p></li>
+<li><p>Time series: time series data set containing additional attributes such as frequency and dates.</p></li>
+<li><p>List: can contain any type of objects, including lists</p></li>
+</ul>
+</div>
+<div id="missing-values-and-infinite" class="section level2">
+<h2>Missing values and infinite</h2>
+<ul>
+<li><p>NA: missing values (not available)</p></li>
+<li><p>NaN: undefied mathematical operations (not a number)</p></li>
 <li><p>A NaN value is also NA, but the converse is not true.</p></li>
 <li><p>Remove missing valuse</p></li>
 </ul>
@@ -90,52 +114,81 @@ img {
 missingvalue &lt;- is.na(x)
 x[!missingvalue]</code></pre>
 <pre><code>## [1] 1 2 4</code></pre>
-</div>
-<div id="data-frames" class="section level3">
-<h3>3) Data frames</h3>
 <ul>
-<li><p>Used to store tabular values</p></li>
-<li><p>Can store different classes of objects in each column; matices must have the every element be the same class</p></li>
+<li>Positive infinity: <em>Inf</em>; negative infinity: <em>-Inf</em></li>
 </ul>
 </div>
-<div id="names" class="section level3">
-<h3>4) Names</h3>
-<pre class="r"><code>x &lt;- 1:3
-names(x) &lt;- c(&quot;first&quot;, &quot;second&quot;, &quot;third&quot;)
-x</code></pre>
-<pre><code>##  first second  third 
-##      1      2      3</code></pre>
-<pre class="r"><code>names(x)</code></pre>
-<pre><code>## [1] &quot;first&quot;  &quot;second&quot; &quot;third&quot;</code></pre>
-</div>
-<div id="reading-data" class="section level3">
-<h3>5) Reading data</h3>
+<div id="reading-data" class="section level2">
+<h2>Reading data</h2>
+<div id="read.table-read.csv-reading-tabular-data" class="section level4">
+<h4>read.table; read.csv: reading tabular data</h4>
 <ul>
-<li>read.table; read.csv: reading tabular data</li>
-</ul>
-<p>header: logical indicating if the file has a header line</p>
-<p>sep: a string indicating how the columns are separated</p>
-<p>colClasses: a character vector indicating the class of each column in the dataset</p>
-<p>comment.char: a character string indicating the comment charachter</p>
-<p>skip: the number of lines to skip from the beginning</p>
-<p>stringsAsFactors: should character variables be coded as factor?</p>
-<ul>
-<li><p>readLines: reading lines of a text file</p></li>
-<li><p>source: reading in R code files (inverse of dump)</p></li>
-<li><p>dget: reading in R code files (inverse of dput)</p></li>
-<li><p>load: reading in saved workspaces</p></li>
-<li><p>unserialize: reading single R objects in binary form</p></li>
+<li><p>header: logical indicating if the file has a header line</p></li>
+<li><p>sep: a string indicating how the columns are separated</p></li>
+<li><p>colClasses: a character vector indicating the class of each column in the dataset</p></li>
+<li><p>comment.char: a character string indicating the comment charachter</p></li>
+<li><p>skip: the number of lines to skip from the beginning</p></li>
+<li><p>stringsAsFactors: should character variables be coded as factor?</p></li>
 </ul>
 </div>
-<div id="subsetting-lists" class="section level3">
-<h3>6) Subsetting lists</h3>
-<pre class="r"><code>x&lt;- list(a = 1:4, b = 0.6)
-x[1]</code></pre>
-<pre><code>## $a
-## [1] 1 2 3 4</code></pre>
-<pre class="r"><code>x[[1]]</code></pre>
-<pre><code>## [1] 1 2 3 4</code></pre>
-<p>$ can only be used with literal names</p>
+<div id="readlines-reading-lines-of-a-text-file" class="section level4">
+<h4>readLines: reading lines of a text file</h4>
+</div>
+<div id="source-reading-in-r-code-files-inverse-of-dump" class="section level4">
+<h4>source: reading in R code files (inverse of dump)</h4>
+</div>
+<div id="dget-reading-in-r-code-files-inverse-of-dput" class="section level4">
+<h4>dget: reading in R code files (inverse of dput)</h4>
+</div>
+<div id="load-reading-in-saved-workspaces" class="section level4">
+<h4>load: reading in saved workspaces</h4>
+</div>
+<div id="unserialize-reading-single-r-objects-in-binary-form" class="section level4">
+<h4>unserialize: reading single R objects in binary form</h4>
+</div>
+</div>
+<div id="save-data" class="section level2">
+<h2>Save data</h2>
+<p><em>write.table</em></p>
+<p><em>write(x, file = “table.txt”)</em></p>
+</div>
+<div id="generate-data" class="section level2">
+<h2>Generate data</h2>
+<pre class="r"><code>1:10 - 1</code></pre>
+<pre><code>##  [1] 0 1 2 3 4 5 6 7 8 9</code></pre>
+<pre class="r"><code>1:(10 - 1)</code></pre>
+<pre><code>## [1] 1 2 3 4 5 6 7 8 9</code></pre>
+<pre class="r"><code>seq(length = 4, from = 1, to = 5)</code></pre>
+<pre><code>## [1] 1.000000 2.333333 3.666667 5.000000</code></pre>
+<pre class="r"><code>seq(1, 5, 2)#from 1 to 5, increment is 2</code></pre>
+<pre><code>## [1] 1 3 5</code></pre>
+<pre class="r"><code>rep(1, 10)#replicate 1 for 10 times</code></pre>
+<pre><code>##  [1] 1 1 1 1 1 1 1 1 1 1</code></pre>
+<pre class="r"><code>sequence(4:6)</code></pre>
+<pre><code>##  [1] 1 2 3 4 1 2 3 4 5 1 2 3 4 5 6</code></pre>
+<pre class="r"><code>sequence(c(3,6))</code></pre>
+<pre><code>## [1] 1 2 3 1 2 3 4 5 6</code></pre>
+<pre class="r"><code>#generate levels
+gl(3, 5, labels = c(&quot;male&quot;, &quot;female&quot;, &quot;unknown&quot;))#create 3 levels. the number of each level repeats 5 times</code></pre>
+<pre><code>##  [1] male    male    male    male    male    female  female  female 
+##  [9] female  female  unknown unknown unknown unknown unknown
+## Levels: male female unknown</code></pre>
+<pre class="r"><code>#create a data frame
+#it will show all the possible combination of the values from each variable
+expand.grid(var1 = c(60, 80), var2 = c(1, 2), gender = c(&quot;male&quot;, &quot;female&quot;))</code></pre>
+<pre><code>##   var1 var2 gender
+## 1   60    1   male
+## 2   80    1   male
+## 3   60    2   male
+## 4   80    2   male
+## 5   60    1 female
+## 6   80    1 female
+## 7   60    2 female
+## 8   80    2 female</code></pre>
+<pre class="r"><code>#create random sequences
+rnorm(10, mean = 2, sd = 3)</code></pre>
+<pre><code>##  [1] -1.1043268  0.5427291 -2.5438513  3.3884103  1.1221219  3.6746165
+##  [7]  3.6505553 -0.2524134  1.0892009 -0.5008276</code></pre>
 </div>
 
 
