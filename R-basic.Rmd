@@ -116,4 +116,28 @@ expand.grid(var1 = c(60, 80), var2 = c(1, 2), gender = c("male", "female"))
 rnorm(10, mean = 2, sd = 3)
 ```
 
+##Operators
+####Arithmetic operators
+- +, -, *, /, ^ 
 
+- %%: modulo
+
+- %/%: integer division
+
+####Comparision operators
+- <, >, <=, >=, ==, !=
+
+####Logical operator
+- !x: logical not x
+
+- x & y: logical and
+
+- x && y: id
+
+- x | y: logical or
+
+- x || y: id
+
+- xor(x, y): exclusive or
+
+*Note: & and && indicate logical AND and | and || indicate logical OR. The shorter form performs elementwise comparisons in much the same way as arithmetic operators. The longer form evaluates left to right examining only the first element of each vector. Evaluation proceeds only until the result is determined. The longer form is appropriate for programming control-flow and typically preferred in if clauses.*
