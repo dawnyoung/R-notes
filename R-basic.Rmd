@@ -114,6 +114,9 @@ gl(3, 5, labels = c("male", "female", "unknown"))#create 3 levels. the number of
 expand.grid(var1 = c(60, 80), var2 = c(1, 2), gender = c("male", "female"))
 #create random sequences
 rnorm(10, mean = 2, sd = 3)
+#open data editor to input data
+x <- c(1,2)
+data.entry(x)
 ```
 
 ##Operators
